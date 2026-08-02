@@ -5,7 +5,11 @@ from pathlib import Path
 
 import pandas as pd
 
-from vecbench.benchmark.experiment_matrix import ADAPTER_REGISTRY, QUICK_CONFIG, build_matrix
+from vecbench.benchmark.experiment_matrix import (
+    ADAPTER_REGISTRY,
+    QUICK_CONFIG,
+    build_matrix,
+)
 from vecbench.benchmark.runner import run_experiment
 from vecbench.data.generator import compute_ground_truth, generate_vectors
 
