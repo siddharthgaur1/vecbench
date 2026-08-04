@@ -60,14 +60,14 @@ Hardware: whatever machine ran this (`os.cpu_count()`, RAM — not
 auto-detected in this build, see below). Same config → same results ±2%
 (fixed seeds in `data/generator.py`).
 
-## What's here vs. the original spec
+## Limitations
 
 Built: FAISS (Flat/IVF/HNSW) + ChromaDB adapters, recall@k against exact
 ground truth, p50/p95/p99 latency, QPS at multiple concurrency levels,
 insert throughput, `tracemalloc`-based memory, checkpointed runner, quick
 config, self-contained HTML report with Pareto-style recall-latency scatter.
 
-Skipped for this pass — add if actually needed:
+What's not here — add if actually needed:
 - **Qdrant and pgvector adapters** — both need a running Docker service; can't stand those up and leave them running unattended. Add `adapters/qdrant_adapter.py` / `adapters/pgvector_adapter.py` (interfaces already match `BaseAdapter`) once you have the containers up.
 - Real SIFT1M / sentence-transformers embedding datasets — only synthetic unit vectors (see `METHODOLOGY.md` for why that's still valid)
 - `full.yaml`-scale sweep (100k/500k vectors, multiple dims) — quick config only, full run is the multi-hour job the original spec called out
