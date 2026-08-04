@@ -43,13 +43,23 @@ Full data: `results/experiments.parquet`. Interactive charts: `results/report.ht
 - Best for **latency-sensitive approximate search at real corpus scale**: FAISS HNSW, but tune `M`/`ef_search` — don't trust the quick-config defaults above at production scale.
 - Don't judge FAISS IVF from this run — rerun with `nlist` sized correctly for your dataset (`METHODOLOGY.md`).
 
-## Usage
+## Quickstart
 
 ```
 pip install -e .
 python -c "from vecbench.cli import run; run()"     # quick config, ~1 min
 python -m vecbench.cli report                        # writes results/report.html
 ```
+
+## Architecture
+
+Each vector DB (FAISS Flat/IVF/HNSW, ChromaDB) implements one shared
+`BaseAdapter` interface (insert, query, memory footprint), so the runner
+exercises all of them through identical code — recall is scored against
+FAISS Flat's exact search as ground truth, latency is measured per query at
+multiple concurrency levels, and every completed experiment is checkpointed
+to `results/experiments.parquet` so an interrupted run resumes instead of
+restarting.
 
 Checkpointed after every experiment (`results/experiments.parquet`) — an
 interrupted run resumes without re-running completed experiments.
