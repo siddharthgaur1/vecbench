@@ -1,0 +1,14 @@
+# results/ holds committed benchmark output, not source.
+#
+# report.html is written by vecbench/report/html_generator.py (see cli.py) and
+# embeds a ~4.9MB plotly.js bundle. Against ~15KB of Python that is 99.7% of
+# the repository by bytes, so Linguist was badging a benchmarking tool as an
+# HTML project.
+#
+# linguist-generated also collapses these files in diffs, which is what you
+# want for a regenerable artifact.
+results/report.html linguist-generated=true
+results/experiments.parquet linguist-generated=true
+
+# The results are committed on purpose: the README quotes numbers from them and
+# a reader should be able to check those without running a benchmark first.
